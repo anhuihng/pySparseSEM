@@ -5,10 +5,17 @@ Anhui Huang | Ph.D. Electrical and Computer Engineering
 <https://scholar.google.com/citations?user=WhDMZEIAAAAJ&hl=en>
 
 
+## PyPI installation 
+`sparseSEM` is available on PyPI:  https://pypi.org/project/sparseSEM/1.0/. Run command `pip install sparseSEM` to install 
+from PyPI.
 
-## Online Documentation
+`test/` folder contains examples using data packed along with this package in `data/` folder. 
+To run `test/` examples, clone this repo, and run from `test/` directory. 
+
+
+## Documentation
 The theory and background for network topology inference using sparse Structural Equation Models (SEM) can be found 
-in my Ph.D dissertation (Huang A. 2014). The experimental study are also available in the documentation in the package.  
+in my Ph.D dissertation (Huang A. 2014). The experimental study are also available in the `doc/` folder in the package.  
 
 
 ## Configuration
@@ -23,7 +30,12 @@ specified in the package setup.
 accordingly if it was installed in a different path.
 
 
-   
+## R package
+An R package with similiar implementation is also available at CRAN: https://cran.r-project.org/web/packages/sparseSEM/index.html
+
+## OpenMPI
+C/C++ implementation of sparseSEM with openMPI for parallel computation is available in openMPI branch (). 
+
     
 ## Reference
     - Huang A. (2014) Sparse Model Learning for Inferring Genotype and Phenotype Associations. Ph.D Dissertation,
