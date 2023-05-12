@@ -34,7 +34,7 @@ accordingly if it was installed in a different path.
 An R package with similiar implementation is also available at CRAN: https://cran.r-project.org/web/packages/sparseSEM/index.html
 
 ## OpenMPI
-C/C++ implementation of sparseSEM with openMPI for parallel computation is available in openMPI branch (). 
+C/C++ implementation of sparseSEM with openMPI for parallel computation is available in openMPI branch (https://github.com/anhuihng/pySparseSEM/tree/openMPI). 
 
     
 ## Reference
