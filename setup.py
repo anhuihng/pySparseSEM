@@ -1,10 +1,12 @@
 import os
 from setuptools import setup, Extension, find_packages
 
-_VERSION = "1.0"
+_VERSION = "1.1"
 
 sparseSEM_lib = Extension(name='sparseSEM.lassoSML',
-                          sources=[],
+                          sources=['sparseSEM/src/lassoSEM.c',
+                                   'sparseSEM/src/lassoSMLv11beta.c',
+                                   ],
                           include_dirs=['sparseSEM/src',
                                         '/opt/intel/oneapi/mkl/2023.1.0/include'],
                           library_dirs=['/opt/intel/oneapi/mkl/2023.1.0/lib'],
