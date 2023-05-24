@@ -21,7 +21,7 @@ DESCRIPTION:
 
         The program implements the following components:
         Step 1. SEM-ridge regression (L2 penalty) with k-fold CV: this step find the optimal ridge hyperparameter rho
-        Step 2. fit SEM reidge regression model (L2 penalty) with rho from Step 1, obtain the initial status (non-sparse)
+        Step 2. fit SEM ridge regression model (L2 penalty) with rho from Step 1, obtain the initial status (non-sparse)
                 of network structure (B_ridge);
         Step 3.SEM-elastic net regression with k-fold CV: this step finds the optimal hyperparameter (alpha, lambda)
         Step 4. fit SEM-elastic net model with (alpha, lambda) from Step 3.
