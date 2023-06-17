@@ -4,9 +4,15 @@ Anhui Huang | Ph.D. Electrical and Computer Engineering
 
 <https://scholar.google.com/citations?user=WhDMZEIAAAAJ&hl=en>
 
+Provides elastic net penalized maximum likelihood for structural equation models (SEM).   The package implements 
+`lasso` and `elastic net` (l1/l2) penalized SEM and 
+estimates the model parameters with an efficient block coordinate ascent algorithm that maximizes the penalized 
+likelihood of the SEM.  Hyperparameters are inferred from cross-validation (CV).  A Stability Selection (STS) function 
+is also available to provide accurate causal effect selection. 
+
 
 ## PyPI installation 
-`sparseSEM` is available on PyPI:  https://pypi.org/project/sparseSEM/1.0/. Run command `pip install sparseSEM` to install 
+`sparseSEM` is available on PyPI:  https://pypi.org/project/sparseSEM/. Run command `pip install sparseSEM` to install 
 from PyPI.
 
 `test/` folder contains examples using data packed along with this package in `data/` folder. 
