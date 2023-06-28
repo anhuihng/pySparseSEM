@@ -109,7 +109,7 @@ import numpy as np
 from loadSEMlib import loadSEMlib
 import time
 
-def elasticNetSMLcv(X, Y, Missing=None, B=None,
+def elasticNetSEMcv(X, Y, Missing=None, B=None,
                     alpha_factors = np.linspace(1, 0.05, 20),
                     lambda_factors =10**np.linspace(-0.2, -4, 20),
                     kFold = 5,
@@ -167,7 +167,9 @@ def elasticNetSMLcv(X, Y, Missing=None, B=None,
     mseStd = np.asfortranarray(mseStd);
     mseStd = mseStd.ctypes.data_as(ctypes.POINTER(ctypes.c_double));
     _kFold = ctypes.c_int(kFold);
-
+    hyperparameters = np.zeros(2);
+    hyperparameters = np.asfortranarray(hyperparameters);
+    hyperparameters = hyperparameters.ctypes.data_as(ctypes.POINTER(ctypes.c_double));
     m = ctypes.c_int(M);
     n = ctypes.c_int(N);
     v = ctypes.c_int(verbose);
@@ -177,7 +179,9 @@ def elasticNetSMLcv(X, Y, Missing=None, B=None,
                            alpha_factors, _nAlpha,
                            lambda_factors,_nLambda,
                            mse, mseSte, mseStd,
-                           _kFold, v);
+                           _kFold,
+                           hyperparameters,
+                           v);
 
     endTime = time.time();
     runTime = endTime - startTime;
@@ -185,10 +189,12 @@ def elasticNetSMLcv(X, Y, Missing=None, B=None,
     if (verbose >= 0):
         print(f"\t sparseSEM CV running time: ", runTime, " seconds \n");
     output = dict();
-    output['weight'] = np.ctypeslib.as_array(B, shape=(M, M));
-    output["F"] = np.ctypeslib.as_array(f, shape=(1, M));
-
-    output["statistics"] = [];
+    fit = dict();
+    fit['weight'] = np.ctypeslib.as_array(B, shape=(M, M));
+    fit["F"] = np.ctypeslib.as_array(f, shape=(1, M));
+    fit['hyperparameters'] ={"alpha_factor": hyperparameters[0],
+                                "lambda_factor": hyperparameters[1]}
+    fit["statistics"] = [];
     stats = ["True positive",
              "Total positive",
              "False positive",
@@ -198,12 +204,12 @@ def elasticNetSMLcv(X, Y, Missing=None, B=None,
              ]
 
     for i in range(len(stats)):
-        output["statistics"].append((stats[i], stat[i]));
+        fit["statistics"].append((stats[i], stat[i]));
 
     mse = np.ctypeslib.as_array(mse, shape=(nAlpha*nLambda, 1));
     mseSte = np.ctypeslib.as_array(mseSte, shape=(nAlpha * nLambda, 1));
     output["cv"] = np.column_stack((parameters, mse, mse) );
-
+    output['fit'] = fit
     output["runTime"] = runTime;
     return output;
 

@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, Extension, find_packages
 
-_VERSION = "1.1"
+_VERSION = "2.0"
 
 sparseSEM_lib = Extension(name='sparseSEM.lassoSML',
                           sources=['sparseSEM/src/lassoSEM.c',

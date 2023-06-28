@@ -116,7 +116,8 @@ import ctypes
 import numpy as np
 from loadSEMlib import loadSEMlib
 import time
-def elasticNetSML(X, Y, Missing = None, B = None, verbose = 0):
+def elasticNetSEM(X, Y, Missing = None, B = None, verbose = 0):
+    this_call = locals()
     M, N = X.shape;
     if B is None:
         B = np.zeros(M,M);
@@ -147,15 +148,18 @@ def elasticNetSML(X, Y, Missing = None, B = None, verbose = 0):
 
     m = ctypes.c_int(M);
     n = ctypes.c_int(N);
+    hyperparameters = np.zeros(2);
+    hyperparameters = np.asfortranarray(hyperparameters);
+    hyperparameters = hyperparameters.ctypes.data_as(ctypes.POINTER(ctypes.c_double));
     v = ctypes.c_int(verbose);
     startTime = time.time();
-    semlib.mainSML_adaEN(Y, X, m, n, Missing, B, f, stat, v);
+    semlib.mainSML_adaEN(Y, X, m, n, Missing, B, f, stat, hyperparameters, v);
     #void mainSML_adaEN(double *Y, double *X, int *m, int *n, int *Missing,double*B, double *f,double*stat,int*VB)
     endTime = time.time();
     runTime = endTime - startTime;
 
     if (verbose >= 0):
-        print(f"\t sparseSEM running time: ", runTime, " seconds \n");
+        print(f"\t sparseSEM running time: {runTime} seconds, verbose= {v} \n");
     output = dict();
     output['weight'] = np.ctypeslib.as_array(B, shape=(M, M));
     output["F"] = np.ctypeslib.as_array(f, shape=(1, M));
@@ -170,6 +174,10 @@ def elasticNetSML(X, Y, Missing = None, B = None, verbose = 0):
 
     for i in range(len(stats)):
         output["statistics"].append((stats[i], stat[i]) );
-
+    output['hyperparameters'] ={"alpha_factor": hyperparameters[0],
+                                "lambda_factor": hyperparameters[1]}
     output["runTime"] = runTime;
+    del this_call['Y']
+    del this_call['X']
+    output['call'] = this_call
     return output;
