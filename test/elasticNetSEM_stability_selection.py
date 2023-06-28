@@ -5,29 +5,35 @@ Created on Fri April 21, 2023
 
 ##
 import numpy as np
-from sparseSEM import elasticNetSEM, elasticNetSEMcv, elasticNetSEMpoint
+from sparseSEM import elasticNetSEM, elasticNetSEMcv, elasticNetSEMpoint, enSEM_stability_selection
 
 ##
 baseDataDir = './data/'
 B = np.loadtxt(baseDataDir + 'B.csv', dtype = 'float64', delimiter = ',', skiprows=1, usecols=range(1,31))
 X = np.loadtxt(baseDataDir + 'X.csv', dtype = 'float64', delimiter = ',', skiprows=1, usecols=range(1,201))
 Y = np.loadtxt(baseDataDir + 'Y.csv', dtype = 'float64', delimiter = ',', skiprows=1, usecols=range(1,201))
-M = np.loadtxt(baseDataDir + 'Missing.csv', dtype = 'float64', delimiter = ',', skiprows=1, usecols=range(1,201))
+Missing = np.loadtxt(baseDataDir + 'Missing.csv', dtype = 'float64', delimiter = ',', skiprows=1, usecols=range(1,201))
 
 ##
 np.random.seed(0)
-result = elasticNetSEMcv(X, Y, M, B, verbose = 1);
+result = enSEM_stability_selection(Y, X,  Missing, B,
+                                   alpha_factors=np.arange(1, 0.1, -0.1),
+                                   lambda_factors=10 ** np.arange(-0.2, -3, -0.2),
+                                   kFold=5, nBootstrap=100, verbose=-1)
+
+
 print(result.keys() )
-fit = result['fit']
-print(fit.keys())
-print(fit['hyperparameters'])
-print(fit['statistics'])
+fit = result['STS']
+
+print(result['statistics'])
+FDRsetS = result["STS data"]["FDRsetS"]
+FDRsetS[0]
 ##
 # visualize the inferred network:
 import networkx as nx
 import matplotlib.pyplot as plt
 
-adjacent = result['weight']
+adjacent = fit
 r,c = adjacent.shape
 G = nx.Graph()
 for i in range(r):

@@ -6,7 +6,7 @@ Created on Fri April 21, 2023
 
 ##
 import numpy as np
-from sparseSEM import elasticNetSML, elasticNetSMLcv, elasticNetSMLpoint
+from sparseSEM import elasticNetSEM, elasticNetSEMcv, elasticNetSEMpoint
 
 ##
 baseDataDir = './data/'
@@ -17,7 +17,7 @@ M = np.loadtxt(baseDataDir + 'Missing.csv', dtype = 'float64', delimiter = ',', 
 
 ##
 np.random.seed(0)
-result = elasticNetSML(X, Y, M, B, verbose = 1);
+result = elasticNetSEM(X, Y, M, B, verbose = 0);
 print(result.keys() )
 print(result['statistics'])
 ##

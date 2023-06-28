@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74a5a9af-3e1d-47f1-94d9-1768caee73f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sparseSEM/enSEM_STS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/elasticNetSEM_stability_selection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.macosx-10.9-x86_64-cpython-310/sparseSEM.cpython-310-darwin.so" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.macosx-10.9-x86_64-cpython-310/sparseSEM.cpython-310-darwin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM.cpython-310-darwin.so" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM.cpython-310-darwin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/elasticNetSML.py" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/elasticNetSML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/elasticNetSMLcv.py" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/elasticNetSMLcv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/elasticNetSMLpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/elasticNetSMLpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/sparseSEM.cpython-310-darwin.so" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/sparseSEM.cpython-310-darwin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparseSEM/src/lassoSMLv11beta.c" beforeDir="false" afterPath="$PROJECT_DIR$/sparseSEM/src/lassoSMLv11beta.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/simulatedData_elasticNetSML.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/simulatedData_elasticNetSML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/simulatedData_elasticNetSMLcv.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/simulatedData_elasticNetSMLcv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/simulatedData_pointFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/simulatedData_pointFunc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +50,15 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;v1.1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/anhui/Documents/Python_Projects/pySparseSEM&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;git-widget-placeholder&quot;: &quot;v2.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/anhui/Documents/Python_Projects/pySparseSEM/test&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/sparseSEM" />
       <recent name="$PROJECT_DIR$" />
