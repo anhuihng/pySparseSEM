@@ -902,7 +902,7 @@ double Weighted_LassoSf_adaEN(double * Wori, double *B, double *f, double *Ycopy
 		{
 			if(s[i] >0)
 			{ 	//
-				if(verbose>6) printf("\t\t\t\t\t updating gene %d \n",i);
+				if(verbose>6) printf("\t\t\t\t\t updating Node %d \n",i);
 				ei[i] = 1;
 
 
@@ -971,7 +971,7 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 							}else //m_ij ~=0 go to the quadratic equation
 							{
 								//
-								if(verbose>7) printf("\t\t\t\t\t\t\t gene %d \t interact with gene %d.\tQuadratic equation\n",i,j);
+								if(verbose>7) printf("\t\t\t\t\t\t\t gene %d \t interact with Node %d.\tQuadratic equation\n",i,j);
 
 								d_ij = 1/m_ij + B[j*M+i];
 								theta_ijp = r_ij*d_ij + beta_ij - lambdaW;
@@ -1244,7 +1244,7 @@ double Weighted_LassoSf_MLf_adaEN(double * Wori, double *BL, double *fL, double 
 	double d_ij, theta_ijp,k_ijp,q_ijp,Bijpp, Bijpm; //case (14)
 	double q_ijm, theta_ijm, Bijmm, Bijmp,Lss,candsBij,LssCands;
 
-	//converge of gene i
+	//converge of Node i
 	double dB,ziDb,BF1;
 
 	//converge of while
@@ -1267,7 +1267,7 @@ double Weighted_LassoSf_MLf_adaEN(double * Wori, double *BL, double *fL, double 
 		{
 			if(s[i] >0)
 			{ 	//
-				if(verbose>6) printf("\t\t\t\t\t updating gene %d \n",i);
+				if(verbose>6) printf("\t\t\t\t\t updating Node %d \n",i);
 				//
 				ei[i] = 1;
 
@@ -1315,7 +1315,7 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 							if (fabs(m_ij)<1e-10) //go to the linear equation
 							{
 								//
-								if(verbose>7) printf("\t\t\t\t\t\t\t gene %d \t interact with gene %d.\tLinear equation\n",i,j);
+								if(verbose>7) printf("\t\t\t\t\t\t\t Node %d \t interact with Node %d.\tLinear equation\n",i,j);
 								//
 								Bij = (beta_ij-lambdaW)/r_ij;
 								if(Bij>0)
@@ -1335,7 +1335,7 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 							}else //m_ij ~=0 go to the quadratic equation
 							{
 								//
-								if(verbose>7) printf("\t\t\t\t\t\t\t gene %d \t interact with gene %d.\tQuadratic equation\n",i,j);
+								if(verbose>7) printf("\t\t\t\t\t\t\t Node %d \t interact with Node %d.\tQuadratic equation\n",i,j);
 								//
 								//assume Bij >0
 								d_ij = 1/m_ij + B[j*M+i];
@@ -1415,7 +1415,7 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 
 				f[i] = f0[i] - BF1;
 				ei[i] = 0; // re-set ei for next i
-			}else//s[i]  no un-zero weight in this gene
+			}else//s[i]  no un-zero weight in this Node
 			{
 				readPtr = &B[i];
 				dcopy(&M,&toyZero,&inc0,readPtr,&ldM);
@@ -1495,7 +1495,7 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 			if(s[i] >0)
 			{
 				//
-				if(verbose>6) printf("\t\t updating gene %d \n",i);
+				if(verbose>6) printf("\t\t updating Node %d \n",i);
 				//
 			ei[i] = 1;
 
@@ -1536,13 +1536,13 @@ r_ij = r_ij + (1 -alpha_factor)*lambda;
 						if (fabs(m_ij)<1e-10) //go to the linear equation
 						{
 							//
-							if(verbose>7) printf("\t\t\t gene %d \t interact with gene %d.\tLinear equation\n",i,j);
+							if(verbose>7) printf("\t\t\t Node %d \t interact with Node %d.\tLinear equation\n",i,j);
 							B[j*M+i] = beta_ij/r_ij;
 
 						}else //m_ij ~=0 go to the quadratic equation
 						{
 							//
-							if(verbose>7) printf("\t\t\t gene %d \t interact with gene %d.\tQuadratic equation\n",i,j);
+							if(verbose>7) printf("\t\t\t Node %d \t interact with Node %d.\tQuadratic equation\n",i,j);
 							//
 
 							d_ij = 1/m_ij + B[j*M+i];
@@ -2164,7 +2164,9 @@ if(i_alpha ==0)
 
 
 //void mainSML_adaEN(double *Y, double *X, int *m, int *n, int *Missing,double*B, double *f,double*stat,int*VB)
-void mainSML_adaEN(double *Y, double *X, int M, int N, int *Missing,double*B, double *f,double*stat,int verbose)
+void mainSML_adaEN(double *Y, double *X, int M, int N, int *Missing,double*B, double *f,double*stat,
+                    double *out_paras,
+                    int verbose)
 {
 	int i, j,index;//M, N, ,verbose
 	int inci = 1;
@@ -2298,10 +2300,10 @@ void mainSML_adaEN(double *Y, double *X, int M, int N, int *Missing,double*B, do
 
 	ilambda_cv_ms 			= lambdaEN[ind_minEN];
 	alpha_factor  			= alpha_factors[ind_minEN];
-	if(verbose==0) printf("\tAdaptive_EN %d-fold CV, alpha: %f.\n", Kcv,alpha_factor);
+	if(verbose>=0) printf("\tAdaptive_EN %d-fold CV, alpha: %f.\n", Kcv,alpha_factor);
 
 
-	if(verbose==0) printf("Step 3: CV support; alpha: %f, number of lambda needed: %d\n", alpha_factor,ilambda_cv_ms);
+	if(verbose>=0) printf("Step 3: CV support; alpha: %f, number of lambda needed: %d\n", alpha_factor,ilambda_cv_ms);
 
 	//call centerYX;
 	double *meanY, *meanX, *Ycopy, *Xcopy;
@@ -2330,7 +2332,7 @@ void mainSML_adaEN(double *Y, double *X, int M, int N, int *Missing,double*B, do
 
 	lambda_max = lambdaMax_adaEN(Ycopy,Xcopy,W,M, N,alpha_factor);
 
-	if(verbose==0) printf("Step 4: lasso selection path.\n");
+	if(verbose>=0) printf("Step 4: lasso selection path.\n");
 
 	for(ilambda = 0;ilambda<ilambda_cv_ms;ilambda++)
 	{
@@ -2346,6 +2348,10 @@ if(verbose>0) printf("\tlambda: %f\n", lambda);
 		QlambdaMiddleCenter(Ycopy,Xcopy, Q,B,f,sigma2,M, N,QIBinv); //same set of Y,X 		<-- mueL not needed
 		lambda_factor_prev = lambda_factors[ilambda];
 	}//ilambda: selection path
+
+	out_paras[0] = alpha_factor;
+	out_paras[1] = lambda_factor;
+	if(verbose>=0) printf("SEM fit with alpha: %f, lambda: %f\n", alpha_factor, lambda_factor);
 	stat[0] = 0;// correct positive
 	stat[2] = 0;//false positive
 	stat[3] = 0;//positive detected
@@ -2369,7 +2375,7 @@ if(verbose>0) printf("\tlambda: %f\n", lambda);
 	//power
 	stat[4] = stat[0]/stat[1];
 	stat[5] = stat[2]/stat[3];
-	if(verbose==0) printf("Step 5: Finish calculation; detection power in stat vector.\n");
+	if(verbose>=0) printf("Step 5: Finish calculation; detection power in stat vector.\n");
 	free(Strue);
 	free(meanY);
 	free(meanX);
@@ -2630,9 +2636,9 @@ if(i_alpha ==0)
 	rho_factor = rho_factors[irho-1]*N/(N-Ntest);
 	if(verbose>4) printf("sigma2learnt: %f\n",sigma2R);
 
-	if(verbose==0) printf("Step 1: ridge CV; find rho : %f\n", rho_factor);
+	if(verbose>=0) printf("Step 1: ridge CV; find rho : %f\n", rho_factor);
 	sigma2learnt = constrained_ridge_cff(Y, X, rho_factor, M, N,BR,fR,mueR,verbose);
-	if(verbose==0) printf("Step 2: ridge; calculate weights.\n");
+	if(verbose>=0) printf("Step 2: ridge; calculate weights.\n");
 
 	for(i=0;i<MM;i++) W[i] = 1/fabs(BL[i]+ 1e-10);
 
@@ -2903,6 +2909,7 @@ void mainSML_adaENcv(double *Y, double *X, int M, int N, int *Missing, double*B,
 			double *mse, double*mseSte,
 			double *mseStd,
 			int Kcv,
+			double *out_paras,
 			int verbose) 						// mseStd: nLmabda x 2 matrix, keep mse + std
 {
 
@@ -3089,6 +3096,8 @@ void mainSML_adaENcv(double *Y, double *X, int M, int N, int *Missing, double*B,
 
 	}//ilambda; selection path
 
+    out_paras[0] = alpha_factor;
+    out_paras[1] = lambda_factor;
 	stat[0] = 0;// correct positive
 	stat[2] = 0;//false positive
 	stat[3] = 0;//positive detected
@@ -3345,18 +3354,19 @@ void mainSML_adaENpointLambda(double *Y, double *X, int M, int N, int *Missing, 
 // compute Bs for all {alpha, lambda} return to R
 // R will repeat calling this functions for 100times, compute FDR Ev for all setups.
 //from input: {alpha, lambda} are in descending order with among of shrinkage
-void mainSML_adaENstabilitySelection(double *Y, double *X, int *m, int *n, int *Missing,
+void mainSML_adaENstabilitySelection(double *Y, double *X, int M, int N, int *Missing,
 			double*B, double *f,double*stat,double*alpha_factors,int *nAlpha,
-			double *lambda_factors, int *nLambda, double *mseStd, int*VB,
-			double *Bout) 						// mseStd: nLmabda x 2 matrix, keep mse + std
+			double *lambda_factors, int nLambda, double *mseStd, int verbose,
+			double *Bout,
+			int Kcv) 						// mseStd: nLmabda x 2 matrix, keep mse + std
 {
-	int M, N, i, j,index,verbose;
+	int i, j,index; //M, N,,verbose
 	int inci 				= 1;
 	int incj 				= 1;
 	int inc0 				= 0;
-	M 						= m[0];
-	N 						= n[0];
-	verbose 				= VB[0];
+	//M 						= m[0];
+	//N 						= n[0];
+	//verbose 				= VB[0];
 	int MN 					= M*N;
 	int MM 					= M*M;
 	double *Strue;
@@ -3385,7 +3395,7 @@ void mainSML_adaENstabilitySelection(double *Y, double *X, int *m, int *n, int *
 
 	//call cv_gene_nets_support ------------------------SYSTEM PARAMETERS
 	int maxiter 			= 500;
-	int Kcv 				= 5;
+	//int Kcv 				= 5;
 
 	double step 	= -0.2;
 	//rho factor
@@ -3475,7 +3485,7 @@ void mainSML_adaENstabilitySelection(double *Y, double *X, int *m, int *n, int *
 	alpha_factor  			= alpha_factors[ind_minEN];
 	if(verbose==0) printf("\tAdaptive_EN %d-fold CV for ridge-weight, alpha: %f.\n", Kcv,alpha_factor);
 	//----------------------------------------------------------R-package
-	Nlambdas 				= nLambda[0];
+	Nlambdas 				= nLambda; //[0];
 
 	//----------------------------------------------------------R-package
 	if(verbose==0) printf("Step 3: CV support; alpha: %f, number of lambda needed: %d\n", alpha_factor,ilambda_cv_ms);

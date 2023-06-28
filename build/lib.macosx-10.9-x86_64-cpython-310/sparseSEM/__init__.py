@@ -4,13 +4,15 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__)))
 
 from .loadSEMlib import loadSEMlib
-from .elasticNetSML import elasticNetSML
-from .elasticNetSMLcv import elasticNetSMLcv
-from .elasticNetSMLpoint import elasticNetSMLpoint
+from .elasticNetSML import elasticNetSEM
+from .elasticNetSMLcv import elasticNetSEMcv
+from .elasticNetSMLpoint import elasticNetSEMpoint
+from .enSEM_STS import enSEM_stability_selection
 __all__ = ['loadSEMlib',
-           'elasticNetSML',
-            'elasticNetSMLcv',
-           'elasticNetSMLpoint',
+           'elasticNetSEM',
+           'elasticNetSEMcv',
+           'elasticNetSEMpoint',
+           'enSEM_stability_selection',
            ]
 
 #__version__ = get_versions()['version']

@@ -109,10 +109,10 @@ import numpy as np
 from loadSEMlib import loadSEMlib
 import time
 
-def elasticNetSMLpoint(X, Y, Missing=None, B=None,
-                    alpha_factor = 1,
-                    lambda_factor =0.01,
-                    verbose=0):
+def elasticNetSEMpoint(X, Y, Missing=None, B=None,
+                       alpha_factor = 1,
+                       lambda_factor =0.01,
+                       verbose=0):
     M, N = X.shape;
     if B is None:
         B = np.zeros(M*M).reshape(M,M);

@@ -44,7 +44,17 @@ An R package for `sparseSEM` is also available at CRAN: https://cran.r-project.o
 ### OpenMPI
 C/C++ implementation of sparseSEM with openMPI for parallel computation is available in openMPI branch (https://github.com/anhuihng/pySparseSEM/tree/openMPI). 
 
-    
+### Network Inference Example
+The following network was a Yeast Gene Regulatory Network (GRN) inferred by `sparseSEM`. 
+
+
+![Alt text](doc/Fig4_cisTransNetworkYeast_clusters_manualAdjusted_GOterm.jpg?raw=true "Title")
+Fig.1 Sparse budding yeast GRN inferred by `sparseSEM`
+![Alt text](doc/Fig5_yeast_grn_genome_biology.png?raw=true "Title")
+Fig.2 Budding yeast gene interaction pattern with link edges identified by `sparseSEM`
+
+ Network visualized via circos and cytoscope packages. See `openMPI/readme.md` as well as `doc/*` for more details.
+
 ## Reference
     - Huang A. (2014) Sparse Model Learning for Inferring Genotype and Phenotype Associations. Ph.D Dissertation,
     University of Miami, Coral Gables, FL, USA.
